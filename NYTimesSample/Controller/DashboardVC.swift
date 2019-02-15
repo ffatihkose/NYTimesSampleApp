@@ -8,20 +8,18 @@
 
 import UIKit
 
-
-
 class DashboardVC: BaseVC {
-private let refreshControl = UIRefreshControl()
+    
+    private let refreshControl = UIRefreshControl()
     
     @IBOutlet fileprivate weak var tableView: UITableView!
     @IBOutlet fileprivate weak var lblNoData: UILabel!
-    @IBOutlet fileprivate weak var indicatorView: UIActivityIndicatorView!
     
     var dashboardVM:DashboardVM!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        
     }
     
     override func rightItemMorePressed() {
@@ -42,34 +40,29 @@ extension DashboardVC {
     fileprivate func setupUI()
     {
         self.viewBackgroundColor = Theme.Colors.backgroundLight.color
-        self.titleText = "NY Times Most Popular"
+        self.titleText = "NYTimes Most Popular Articles"
         self.viewBackgroundColor = Theme.Colors.backgroundLight.color
         self.rightButtonItemList = [.more,.search]
         
         self.dashboardVM = DashboardVM()
         self.dashboardVM.newsLoaded = { [weak self] in
             DispatchQueue.main.async {
-                
                 self?.tableReload()
-               
             } 
         }
         
         self.dashboardVM.selectedItem = { [weak self] (item) in
-            
-                
+
                 let vc = ArticleDetailVC.instantiate()
                 vc.model = item
                 self?.navigationController?.pushViewController(vc, animated: true)
-                
-            
+
         }
         setupTableView()
         dashboardVM.loadNews()
     }
     
     private func tableReload(){
-        self.indicatorView.isHidden = true
         self.lblNoData.isHidden = self.dashboardVM.hasNews()
         self.tableView.isHidden = !self.dashboardVM.hasNews()
         self.tableView.reloadData()
@@ -90,8 +83,6 @@ extension DashboardVC {
     }
     
     @objc private func refreshData(_ sender: Any) {
-        
-        self.indicatorView.isHidden = false
         dashboardVM.loadNews()
     }
     

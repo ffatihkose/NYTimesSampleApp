@@ -14,7 +14,7 @@ class NYTNewsItemCell: UITableViewCell, Reusable {
     
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var imgView: UIImageView!
-    @IBOutlet weak var lblWriter: UILabel!
+    @IBOutlet weak var lblAuthor: UILabel!
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var imgViewIco: UIImageView!
     override func awakeFromNib() {
@@ -30,14 +30,12 @@ class NYTNewsItemCell: UITableViewCell, Reusable {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func update(_ model : Result){
         self.newsModel = model
         lblTitle.text = model.title
-        lblWriter.text = model.byline
+        lblAuthor.text = model.byline
         lblDate.text = model.publishedDate
         
         let imgUrl = model.media[0].mediaMetadata.filter { (md) -> Bool in

@@ -26,7 +26,7 @@ class ArticleDetailVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-        self.titleText = "NY Times Most Popular"
+        self.titleText = "NYTimes Most Popular Article Detail"
     }
     
     fileprivate func updateUI(){
