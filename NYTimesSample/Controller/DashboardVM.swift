@@ -97,7 +97,7 @@ extension DashboardVM {
             return
         }
         
-        filteredNews = welcome.results.filter {$0.title.contains(text!)}
+        filteredNews = welcome.results.filter {$0.title.localizedCaseInsensitiveContains(text!) || $0.byline.localizedCaseInsensitiveContains(text!)}
     }
     
 }

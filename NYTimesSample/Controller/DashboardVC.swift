@@ -26,12 +26,10 @@ private let refreshControl = UIRefreshControl()
     
     override func rightItemMorePressed() {
         super.rightItemMorePressed()
-         print("RightItemMorePressed")
     }
     
     override func leftItemAction() {
         super.leftItemAction()
-        print("LeftItemAction")
     }
     
     deinit {
@@ -58,13 +56,13 @@ extension DashboardVC {
         }
         
         self.dashboardVM.selectedItem = { [weak self] (item) in
-            DispatchQueue.main.async {
+            
                 
                 let vc = ArticleDetailVC.instantiate()
                 vc.model = item
                 self?.navigationController?.pushViewController(vc, animated: true)
                 
-            }
+            
         }
         setupTableView()
         dashboardVM.loadNews()
